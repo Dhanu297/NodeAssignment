@@ -13,12 +13,12 @@ exports.getExpenses = async (req, res) => {
       return {
         id: doc.id,
         userid: data.userid,
-        savings: data.savings,
-        paymentObligations: data.paymentObligations,
-        insurance: data.insurance,
-        housing: data.housing,
-        utilities: data.utilities,
-        personal: data.personal,
+        ...(data.savings && { data: item.savings }),
+        ...(data.paymentObligations && { paymentObligations: data.paymentObligations }),
+        ...(data.insurance && { insurance: data.insurance }),
+        ...(data.housing && { housing: data.housing }),
+        ...(data.utilities && { utilities: data.utilities }),
+        ...(data.personal && { personal: data.personal }),
         createdAt: data.createdAt?.toDate?.() || null,
         updatedAt: data.updatedAt?.toDate?.() || null
       };
@@ -47,12 +47,12 @@ exports.getExpenseById = async (req, res) => {
     const expense = {
       id: doc.id,
       userid: data.userid,
-      savings: data.savings,
-      paymentObligations: data.paymentObligations,
-      insurance: data.insurance,
-      housing: data.housing,
-      utilities: data.utilities,
-      personal: data.personal,
+      ...(data.savings && { data: item.savings }),
+        ...(data.paymentObligations && { paymentObligations: data.paymentObligations }),
+        ...(data.insurance && { insurance: data.insurance }),
+        ...(data.housing && { housing: data.housing }),
+        ...(data.utilities && { utilities: data.utilities }),
+        ...(data.personal && { personal: data.personal }),
       createdAt: data.createdAt?.toDate?.() || null,
       updatedAt: data.updatedAt?.toDate?.() || null
     };
