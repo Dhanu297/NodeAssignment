@@ -17,8 +17,8 @@ module.exports = function validateIncome(req, res, next) {
 
   // numeric validator
   const validateNumber = (value, field) => {
-    if (value === undefined || value === null || isNaN(value)) {
-      errors.push(`${field} is required and must be a valid number.`);
+    if (isNaN(value)) {
+      errors.push(`${field} must be a valid number.`);
     }
   };
 

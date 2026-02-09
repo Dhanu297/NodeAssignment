@@ -1,20 +1,40 @@
-// Helper: check if value is a valid number
+//This middleware is used for validating the request for expense.
+
+
+// check if value is a valid number
 function validateNumber(value, field, errors) {
-  if (value === undefined || value === null || isNaN(value)) {
+  if (isNaN(value)) {
     errors.push(`${field} must be a valid number.`);
   }
 }
 
-// Helper: validate nested objects
+// validate nested objects
 function validateCategory(obj, categoryName, errors) {
-  if (!obj || typeof obj !== "object") {
-    errors.push(`${categoryName} must be an object.`);
-    return;
-  }
-
+ 
   Object.entries(obj).forEach(([key, value]) => {
     validateNumber(value, `${categoryName}.${key}`, errors);
   });
+}
+//Function to check if the category is from allowed categories
+function validateExpenseCategories(body) {
+  const ALLOWED_CATEGORIES = [
+  "savings",
+  "paymentObligations",
+  "insurance",
+  "housing",
+  "utilities",
+  "personal"
+];
+
+  const sentCategories = Object.keys(body);
+
+  for (const category of sentCategories) {
+    if (!ALLOWED_CATEGORIES.includes(category)) {
+      throw new Error(
+        `Invalid category: ${category}. Allowed categories are: ${ALLOWED_CATEGORIES.join(", ")}`
+      );
+    }
+  }
 }
 
 module.exports = function validateExpense(req, res, next) {
@@ -42,6 +62,8 @@ module.exports = function validateExpense(req, res, next) {
   validateCategory(housing, "housing", errors);
   validateCategory(utilities, "utilities", errors);
   validateCategory(personal, "personal", errors);
+  // Category of expendse should be from predefined properties. 
+ validateExpenseCategories(req.body);
 
   // Return errors if any
   if (errors.length > 0) {

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Finance REST API</title>
+<link rel="stylesheet" href="index.css">  
+</head>
+
+<body>
+
+  <h1>Personal Finance REST API</h1>
+  <p>This API allows you to manage users, find his incomes and expenses using Firestore Database.</p>
+
+  <div class="section">
+    <h2>Available Endpoints</h2>
+
+    <div class="endpoints">
+      <h3>Users</h3>
+      <ul>
+        <li>GET <a href="/users">/users</a> - Get all users</li>
+        <li>GET /users/:id - Get user by ID</li>
+        <li>POST /users - Create a new user</li>
+        <li>PUT /users/:id - Update user details</li>
+        <li>DELETE /users/:id - Delete a user</li>
+      </ul>
+    </div>
+
+    <div class="endpoints">
+      <h3>Incomes</h3>
+      <ul>
+        <li>GET <a href="/incomes">/incomes</a> - Get all income records</li>
+        <li>GET /incomes/:id - Get income by ID</li>
+        <li>POST /incomes - Add new income entry</li>
+        <li>PUT /incomes/:id - Update income entry</li>
+        <li>DELETE /incomes/:id - Delete income entry</li>
+      </ul>
+    </div>
+
+    <div class="endpoints">
+      <h3>Expenses</h3>
+      <ul>
+        <li>GET <a href="/expenses">/expenses</a> - Get all expenses</li>
+        <li>GET /expenses/:id - Get expense by ID</li>
+        <li>POST /expenses - Add new expense entry</li>
+        <li>PUT /expenses/:id - Update expense entry</li>
+        <li>DELETE /expenses/:id - Delete expense entry</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 Personal Finance API Build by Dhanashree Pawar
+  </div>
+
+</body>
+</html>

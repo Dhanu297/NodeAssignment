@@ -3,16 +3,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "Simple REST API",
-    endpoints: {
-      users: "/users",
-      expenses: "/expenses",
-      income: "/incomes"
-    }
-  });
-});
+app.use(express.static('public'))
 
 app.use("/users", require("./src/routes/userRoutes"));
 app.use("/expenses", require("./src/routes/expenseRoutes"));

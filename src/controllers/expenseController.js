@@ -2,6 +2,7 @@ const db = require("../configuration/firebase_config");
 
 const handleError = require("../utils/errorHandler");
 
+//This controler will deal with firestore collection 
 // GET all expenses
 exports.getExpenses = async (req, res) => {
   try {
