@@ -22,7 +22,8 @@ Overview
         Tracks different income sources like wages, secondary income, interest, support payments, and others.
     Expenses
         Stores detailed expense categories including savings, payment obligations, insurance, housing, utilities, and personal expenses.
-The API follows a clean MVC structure with separate controllers, routes, and validation middleware.
+
+The API follows a clean MVC structure with separate controllers, routes, and validations in middleware.
 
 Features
 - Modular MVC architecture
@@ -30,7 +31,7 @@ Features
 - validation 
 - JSON responses
 - Timestamp tracking (createdAt, updatedAt)
-- Easy to extend for dashboards, analytics, and reporting
+- Easy to extend 
 
 Project Structure
 
@@ -56,6 +57,8 @@ src/
         errorHandler.js
 server.js
 app.js
+.gitignore
+.env
 
 Prerequisites
 Before running the project, ensure you have:
@@ -63,7 +66,7 @@ Before running the project, ensure you have:
 - npm 
 - A Firebase project with Firestore enabled
 - Firebase Admin SDK credentials (service account JSON)
-    To get the service account json file go to your firebase console. Project settings - there is a dropdown menu called service account. Then there are 4 options to chose which technology. Select node js and generate new private key. copy that file  into configuration folder with name FireBaseAdminConfig.json
+    To get the service account json file go to your firebase console. Project settings - there is a dropdown menu called service account. Then there are 4 options to chose which technology. Select node js and generate new private key.
 
 Installation
 1. Clone the repository
@@ -77,8 +80,11 @@ express
 firebase-admin
 crypto
 dotenv
+nodemon
 
-Environment Variables
+3. copy new private key genererated file from firebase service account, into configuration folder with name FireBaseAdminConfig.json
+
+4. Environment Variables
 This project is using encryption so go to terminal and traverse to src-> configuration folder and run command 
 
 \src\configuration> node encrypt.js
@@ -90,12 +96,11 @@ FIREBASE_KEY=your newly generated key
 FIREBASE_IV=your newly generated IV
 PORT=5000 you can change it to available port
 
-
-⚠ Important Notes
+** Important Notes **
 - carefully copy Encrypted Credentials, key and IV into .env file without any quotes or spaces
 
 
-▶ Running the Application
+5. Running the Application
 Start the server
 npm start
 
@@ -105,7 +110,7 @@ http://localhost:5000 or the port which you mentioned in the .env file.
 
 
 
-API Endpoints
+6. API Endpoints
     User Routes
         get/users  - get all users
         get/users/:id - get user by id
@@ -208,7 +213,7 @@ This project uses the following core dependencies:
 express
 firebase-admin
 dotenv
-corscrypto
+crypto
 nodemon (dev)
 
 Install them via:
