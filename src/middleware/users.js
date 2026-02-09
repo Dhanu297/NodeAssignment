@@ -1,13 +1,18 @@
+/* This middleware is used to validate user related data*/
+
+//Check if the specified email is valid. Returns boolean value
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
+//Check if the specified zip is valid. Returns boolean value
 function isValidZip(zip) {
   const zipRegex = /^[0-9\-]{4,10}$/; // flexible for US/CA formats
   return zipRegex.test(zip);
 }
 
+//This function validates user data and raise appropriate errors.
 module.exports = function validateUser(req, res, next) {
   const { name, username, email, address } = req.body;
 
@@ -48,14 +53,16 @@ module.exports = function validateUser(req, res, next) {
     }
   }
 
-  // return errors if any
+  // If any validation errors exist, return a 400 Bad Request response
   if (errors.length > 0) {
     return res.status(400).json({
       success: false,
-      message: "Validation failed",
+      message: "Invalid data.",
       errors
     });
   }
 
-  next();
+// If everything is valid, continue to the next process
+next();
+
 };

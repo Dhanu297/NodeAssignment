@@ -1,9 +1,16 @@
+/* This is user controller which inturn deals with firestore's "users" collection. 
+and as per the method used performs CRUD operations*/
+
+//import firebase config module for handling firebase related operations
 const db = require("../configuration/firebase_config");
+
+//import global error handling module for error handling.
 const handleError = require("../utils/errorHandler");
 
 // GET all users
 exports.getUsers = async (req, res) => {
   try {
+     // Fetch the user collection from firebase
     const snapshot = await db.collection("users").get();
 
     const users = snapshot.docs.map(doc => {
@@ -29,6 +36,7 @@ exports.getUsers = async (req, res) => {
 // GET user by ID
 exports.getUserById = async (req, res) => {
   try {
+    //retrieve user record i.e document as per the id
     const doc = await db.collection("users").doc(req.params.id).get();
 
     if (!doc.exists) {
@@ -99,6 +107,7 @@ exports.updateUser = async (req, res) => {
 
     res.json({
       success: true,
+      id:req.params.id,
       message: "User updated successfully"
     });
   } catch (error) {

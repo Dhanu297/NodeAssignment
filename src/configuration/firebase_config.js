@@ -26,4 +26,5 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+//Export the module to be used in controllers
 module.exports = db;

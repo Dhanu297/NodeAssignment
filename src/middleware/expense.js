@@ -1,5 +1,4 @@
-//This middleware is used for validating the request for expense.
-
+/*This middleware is used for validating the request for expense.*/
 
 // check if value is a valid number
 function validateNumber(value, field, errors) {
@@ -8,7 +7,7 @@ function validateNumber(value, field, errors) {
   }
 }
 
-// validate nested objects
+// validate categories objects
 function validateCategory(obj, categoryName, errors) {
  
   Object.entries(obj).forEach(([key, value]) => {
@@ -37,6 +36,7 @@ function validateExpenseCategories(body) {
   }
 }
 
+//This function validates expense data and raise appropriate errors.
 module.exports = function validateExpense(req, res, next) {
   const {
     userid,
@@ -65,14 +65,16 @@ module.exports = function validateExpense(req, res, next) {
   // Category of expendse should be from predefined properties. 
  validateExpenseCategories(req.body);
 
-  // Return errors if any
+// If any validation errors exist, return a 400 Bad Request response
   if (errors.length > 0) {
     return res.status(400).json({
       success: false,
-      message: "Validation failed",
+       message: "Invalid data.",
       errors
     });
   }
+  
+// If everything is valid, continue to the next process
+next();
 
-  next();
 };

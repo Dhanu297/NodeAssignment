@@ -1,9 +1,16 @@
+/* This is income controller which inturn deals with firestore's "income" collection. 
+and as per the method used performs CRUD operations*/
+
+//import firebase config module for handling firebase related operations
 const db =require("../configuration/firebase_config");
+
+//import global error handling module for error handling.
 const handleError = require("../utils/errorHandler");
 
 // GET all income records
 exports.getIncome = async (req, res) => {
   try {
+    // Fetch the income collection from firebase
     const snapshot = await db.collection("income").get();
 
     const incomeList = snapshot.docs.map(doc => {
@@ -31,6 +38,7 @@ exports.getIncome = async (req, res) => {
 // GET income by ID
 exports.getIncomeById = async (req, res) => {
   try {
+    //retrieve user record i.e document as per the id
     const doc = await db.collection("income").doc(req.params.id).get();
 
     if (!doc.exists) {
@@ -121,6 +129,7 @@ exports.updateIncome = async (req, res) => {
 
     res.json({
       success: true,
+      id:req.params.id,
       message: "Income updated successfully"
     });
   } catch (error) {

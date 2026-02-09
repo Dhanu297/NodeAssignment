@@ -1,11 +1,16 @@
+/* This is expense controller which inturn deals with firestore's "expense" collection. 
+and as per the method used performs CRUD operations*/
+
+//import firebase config module for handling firebase related operations
 const db = require("../configuration/firebase_config");
 
+//import global error handling module for error handling.
 const handleError = require("../utils/errorHandler");
 
-//This controler will deal with firestore collection 
 // GET all expenses
 exports.getExpenses = async (req, res) => {
   try {
+    // Fetch the expenses collection from firebase
     const snapshot = await db.collection("expenses").get();
 
     const expenses = snapshot.docs.map(doc => {
@@ -34,6 +39,7 @@ exports.getExpenses = async (req, res) => {
 // GET expense by ID
 exports.getExpenseById = async (req, res) => {
   try {
+    //retrieve expense record i.e document as per the id
     const doc = await db.collection("expenses").doc(req.params.id).get();
 
     if (!doc.exists) {
