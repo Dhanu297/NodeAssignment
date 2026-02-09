@@ -8,7 +8,7 @@ app.use(express.static("public"));
 
 // Route the root URL to your index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile('public', 'index.html');
 });
 
 app.use("/users", require("./src/routes/userRoutes"));
