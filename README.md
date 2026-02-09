@@ -47,6 +47,9 @@ src/
         userRoutes.js
         incomeRoutes.js
         expenseRoutes.js
+    public
+        index.html
+        index.css
     configuration/
         firebase.js
     utils/
