@@ -19,7 +19,7 @@ exports.getExpenses = async (req, res) => {
       return {
         id: doc.id,
         userid: data.userid,
-        ...(data.savings && { data: item.savings }),
+        ...(data.savings && { savings: data.savings }),
         ...(data.paymentObligations && { paymentObligations: data.paymentObligations }),
         ...(data.insurance && { insurance: data.insurance }),
         ...(data.housing && { housing: data.housing }),
@@ -54,7 +54,7 @@ exports.getExpenseById = async (req, res) => {
     const expense = {
       id: doc.id,
       userid: data.userid,
-      ...(data.savings && { data: item.savings }),
+        ...(data.savings && { savings: data.savings }),
         ...(data.paymentObligations && { paymentObligations: data.paymentObligations }),
         ...(data.insurance && { insurance: data.insurance }),
         ...(data.housing && { housing: data.housing }),
@@ -85,12 +85,12 @@ exports.addExpense = async (req, res) => {
 
     const newExpense = {
       userid,
-      savings,
-      paymentObligations,
-      insurance,
-      housing,
-      utilities,
-      personal,
+      savings: savings || {},
+      paymentObligations: paymentObligations || {},
+      insurance: insurance || {},
+      housing: housing || {},
+      utilities: utilities || {},
+       personal: personal || {},
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -122,12 +122,12 @@ exports.updateExpense = async (req, res) => {
 
     const updatedData = {
       userid,
-      savings,
-      paymentObligations,
-      insurance,
-      housing,
-      utilities,
-      personal,
+      savings: savings || {},
+      paymentObligations: paymentObligations || {},
+      insurance: insurance || {},
+      housing: housing || {},
+      utilities: utilities || {},
+       personal: personal || {},
       updatedAt: new Date()
     };
 

@@ -9,7 +9,11 @@ function validateNumber(value, field, errors) {
 
 // validate categories objects
 function validateCategory(obj, categoryName, errors) {
- 
+ // If the category is missing or null, skip validation entirely
+  if (!obj || typeof obj !== "object") {
+    return;
+  }
+
   Object.entries(obj).forEach(([key, value]) => {
     validateNumber(value, `${categoryName}.${key}`, errors);
   });
@@ -24,10 +28,18 @@ function validateExpenseCategories(body) {
   "utilities",
   "personal"
 ];
+// Fields that should be ignored during category validation
+  const IGNORE_FIELDS = ["userid", "createdAt", "updatedAt"];
 
+  // Extract keys from the request body
   const sentCategories = Object.keys(body);
 
   for (const category of sentCategories) {
+     // Skip ignored fields
+    if (IGNORE_FIELDS.includes(category)) {
+      continue;
+    }
+
     if (!ALLOWED_CATEGORIES.includes(category)) {
       throw new Error(
         `Invalid category: ${category}. Allowed categories are: ${ALLOWED_CATEGORIES.join(", ")}`
