@@ -135,6 +135,7 @@ exports.updateExpense = async (req, res) => {
 
     res.json({
       success: true,
+      id:req.params.id,
       message: "Expense updated successfully"
     });
   } catch (error) {

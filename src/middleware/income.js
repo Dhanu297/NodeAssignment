@@ -12,6 +12,29 @@ module.exports = function validateIncome(req, res, next) {
   } = req.body;
 
   const errors = [];
+  const ALLOWED_CATEGORIES = [
+    "wages",
+    "secondaryIncome",
+    "interest",
+    "supportPayment",
+    "others"
+  ];
+  // Fields that should be ignored during category validation
+  const IGNORE_FIELDS = ["userid", "createdAt", "updatedAt"];
+
+  // Extract keys from the request body
+  const sentCategories = Object.keys(req.body);
+
+  for (const category of sentCategories) {
+     // Skip ignored fields
+    if (IGNORE_FIELDS.includes(category)) {
+      continue;
+    }
+
+    if (!ALLOWED_CATEGORIES.includes(category)) {
+      errors.push(`Invalid category: ${category}. Allowed categories are: ${ALLOWED_CATEGORIES.join(", ")}`);
+    }
+  }
 
   // userid validation
   if (!userid || typeof userid !== "string") {
@@ -20,6 +43,11 @@ module.exports = function validateIncome(req, res, next) {
 
   // check if value is a valid number
   const validateNumber = (value, field) => {
+    // If the category is missing or null, skip validation entirely
+    if (!value) {
+      return;
+    }
+
     if (isNaN(value)) {
       errors.push(`${field} must be a valid number.`);
     }

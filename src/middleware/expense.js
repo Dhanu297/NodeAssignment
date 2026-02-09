@@ -41,9 +41,7 @@ function validateExpenseCategories(body) {
     }
 
     if (!ALLOWED_CATEGORIES.includes(category)) {
-      throw new Error(
-        `Invalid category: ${category}. Allowed categories are: ${ALLOWED_CATEGORIES.join(", ")}`
-      );
+       errors.push(`Invalid category: ${category}. Allowed categories are: ${ALLOWED_CATEGORIES.join(", ")}` );
     }
   }
 }

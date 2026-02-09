@@ -82,11 +82,12 @@ exports.addIncome = async (req, res) => {
 
     const newIncome = {
       userid,
-      wages,
-      secondaryIncome,
-      interest,
-      supportPayment,
-      others,
+      wages: wages ?? 0,
+      secondaryIncome: secondaryIncome ?? 0,
+      interest: interest ?? 0,
+      supportPayment: supportPayment ?? 0,
+      others: others ?? 0,
+
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -117,11 +118,11 @@ exports.updateIncome = async (req, res) => {
 
     const updatedData = {
       userid,
-      wages,
-      secondaryIncome,
-      interest,
-      supportPayment,
-      others,
+      wages: wages ?? 0,
+      secondaryIncome: secondaryIncome ?? 0,
+      interest: interest ?? 0,
+      supportPayment: supportPayment ?? 0,
+      others: others ?? 0,
       updatedAt: new Date()
     };
 
